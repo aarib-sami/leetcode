@@ -1,2 +1,2 @@
-# code-sync
-Coding solutions automatically synced from dotpush extension - https://dotpush.ca/
+# README
+Contains solutions for all the LeetCode problems I successfully solve.
