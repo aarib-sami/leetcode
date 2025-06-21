@@ -9,14 +9,14 @@ class Solution:
             return None
 
         while len(lists) > 1:
-            l1 = lists.pop()
-            l2 = lists.pop()
-
-            mergedList = self.mergeList(l1, l2)
-            lists.append(mergedList)
+            mergedList = []
+            for i in range(0, len(lists), 2):
+                l1 = lists[i]
+                l2 = lists[i+1] if i+1 < len(lists) else None
+                mergedList.append(self.mergeList(l1, l2))
+            lists = mergedList
 
         return lists[0]
-
 
     def mergeList(self, l1, l2):
         res = ListNode()
