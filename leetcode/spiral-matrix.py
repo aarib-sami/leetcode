@@ -23,5 +23,4 @@ class Solution:
             dfs(i+x, j+y, directionIndex)
 
         dfs(0, 0, 0)
-        print(res)
         return res
