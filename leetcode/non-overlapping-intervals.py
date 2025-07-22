@@ -8,9 +8,8 @@ class Solution:
             curStart = intervals[i][0]
 
             if curStart < prevEnd:
-                print(prevEnd, intervals[i])
                 res += 1
-                prevEnd = min(prevEnd,intervals[i][1])
+                prevEnd = min(prevEnd, intervals[i][1])
             else:
                 prevEnd = intervals[i][1]
 
