@@ -1,14 +1,13 @@
 class Solution:
     def partitionString(self, s: str) -> int:
         stringSet = set()
-        res = 0
+        res = 1
 
         for c in s:
             if c in stringSet:
-                print(c)
                 res += 1
-                stringSet = set()
+                stringSet.clear()
             
             stringSet.add(c)
 
-        return res+1
+        return res
