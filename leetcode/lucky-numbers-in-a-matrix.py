@@ -1,11 +1,16 @@
 class Solution:
     def luckyNumbers(self, matrix: List[List[int]]) -> List[int]:
         res = []
+        minCol = defaultdict(int)
         
         def maxInCol(c):
+            if c in minCol:
+                return minCol[c]
+
             res = float('-inf')
             for i in range(len(matrix)):
                 res = max(res, matrix[i][c])
+            minCol[c] = res
             return res
         
         for i in range(len(matrix)):
