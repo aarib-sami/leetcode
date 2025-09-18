@@ -1,13 +1,23 @@
 class Solution:
     def maxSumMinProduct(self, nums: List[int]) -> int:
-        res = float(-inf)
+        res = 0
+        stack = []
+        prefix = [0]
 
-        for i in range(len(nums)):
-            subArrayRes = 0
-            minVal = float(inf)
-            for j in range(i, len(nums)):
-                minVal = min(minVal, nums[j])
-                subArrayRes += nums[j]
-                res = max(res, minVal * subArrayRes)
+        for n in nums:
+            prefix.append(prefix[-1] + n)
 
+        for i, n in enumerate(nums):
+            newStart = i
+            while stack and stack[-1][1] > n:
+                start, val = stack.pop()
+                total = prefix[i] - prefix[start]
+                res = max(res, val * total)
+                newStart = start
+            stack.append((newStart, n))
+
+        for start, val in stack:
+            total = prefix[len(nums)] - prefix[start]
+            res = max(res, val * total)
+    
         return res % (10 ** 9 + 7)
