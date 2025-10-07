@@ -1,29 +1,17 @@
 class Solution:
     def findRelativeRanks(self, score: List[int]) -> List[str]:
-        playerCount = len(score)
-        minHeap = []
-        placement = {}
-        res = []
+        scoreWithRank = [[score, index] for index, score in enumerate(score)]
+        scoreWithRank.sort(reverse=True)
+        res = [0] * len(score)
 
-        for i, s in enumerate(score):
-            heapq.heappush(minHeap, [s, i])
-
-        counter = 0
-
-        for i in range(playerCount):
-            score, index = heapq.heappop(minHeap)
-            if playerCount - i == 3:
-                rank = "Bronze Medal"
-            elif playerCount - i == 2:
-                rank = "Silver Medal"
-            elif playerCount - i == 1:
-                rank = "Gold Medal"
+        for rank, (score, index) in enumerate(scoreWithRank):
+            if rank == 2:
+                res[index] = "Bronze Medal"
+            elif rank == 1:
+                res[index] = "Silver Medal"
+            elif rank == 0:
+                res[index] = "Gold Medal"
             else:
-                 rank = str(playerCount - i)
-            
-            placement[index] = rank
-
-        for i in range(playerCount):
-            res.append(placement[i])
+                res[index] = str(rank + 1)
 
         return res
