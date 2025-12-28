@@ -10,7 +10,7 @@ class Solution:
 
             if index in range(0, len(nums)):
                 if nums[index] > 0:
-                    nums[index] = -nums[index]
+                    nums[index] *= -1
                 elif nums[index] == 0:
                     nums[index] = -(len(nums)+2)
 
