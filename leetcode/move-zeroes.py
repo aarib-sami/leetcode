@@ -4,9 +4,17 @@ class Solution:
         Do not return anything, modify nums in-place instead.
         """
         zeroCount = 0
+        lastOpenPos = deque([])
 
-        for i in range(1, len(nums)):
-            while (i-1-zeroCount) in range(len(nums)) and nums[i-1-zeroCount] == 0:
-                nums[i-zeroCount-1], nums[i-zeroCount] = nums[i-zeroCount], nums[i-zeroCount-1]
+        for i in range(0, len(nums)):
+            if nums[i] == 0:
                 zeroCount += 1
-            zeroCount = 0
+                lastOpenPos.append(i)
+            else:
+                if lastOpenPos:
+                    pos = lastOpenPos.popleft()
+                    nums[pos] = nums[i]
+                    lastOpenPos.append(i)
+        
+        for i in range(len(nums)-1, len(nums)-1-zeroCount, -1):
+            nums[i] = 0
