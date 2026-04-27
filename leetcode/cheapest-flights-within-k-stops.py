@@ -1,18 +1,18 @@
 class Solution:
     def findCheapestPrice(self, n: int, flights: List[List[int]], src: int, dst: int, k: int) -> int:
         graph = defaultdict(list)
-
-        for f, t, p in flights:
-            graph[f].append([t, p])
-
-        cost = [float('inf')] * n
-        cost[src] = 0
+        for s, d, c in flights:
+            graph[s].append([d, c])
+        
+        costs = [float('inf')] * n
+        costs[src] = 0
 
         for i in range(k+1):
-            temp = cost.copy()
-            for start in graph:
-                for t, p in graph[start]:
-                    temp[t] = min(temp[t], cost[t], cost[start]+p)
-            cost = temp
+            temp = costs.copy()
+            for s in range(n):
+                for d, c in graph[s]:
+                    if costs[s] + c < temp[d]:
+                        temp[d] = costs[s] + c
+            costs = temp.copy()
 
-        return cost[dst] if cost[dst] != float('inf') else -1
+        return costs[dst] if costs[dst] != float('inf') else -1
